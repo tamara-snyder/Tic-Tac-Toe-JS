@@ -12,14 +12,13 @@ const Computer = (symbol = 'O') => {
   symbol = symbol
 
   function bestSpot() {
-    // return Board.emptySquares()[0]
     return Game.minimax(board, computer.symbol).index
   }
 
   return {symbol, bestSpot}
 }
 
-const player = Player()
+const human = Player()
 const computer = Computer()
 
 
@@ -37,8 +36,8 @@ const Board = (function() {
 
   function turnClick(square) {
     if (typeof board[square.target.id] == 'number') {
-      Game.turn(square.target.id, player.symbol)
-      if (!Game.checkWin(board, player.symbol) && !Game.checkTie()) Game.turn(computer.bestSpot(), computer.symbol)
+      Game.turn(square.target.id, human.symbol)
+      if (!Game.checkWin(board, human.symbol) && !Game.checkTie()) Game.turn(computer.bestSpot(), computer.symbol)
     }
   }
 
@@ -98,14 +97,14 @@ const Game = (function() {
 
   function gameOver(gameWon) {
     for (let index of winningCombos[gameWon.index]) {
-      document.getElementById(index).style.backgroundColor = gameWon.player == player.symbol ? "blue" : "red"
+      document.getElementById(index).style.backgroundColor = gameWon.player == human.symbol ? "blue" : "red"
     }
 
     for (let i = 0; i < Board.cells.length; i++) {
       Board.cells[i].removeEventListener('click', Board.turnClick, false)
     }
 
-    declareWinner(gameWon.player == player.symbol ? 'You win' : 'You lose.')
+    declareWinner(gameWon.player == human.symbol ? 'You win' : 'You lose.')
   }
 
   function declareWinner(who) {
@@ -116,11 +115,10 @@ const Game = (function() {
   function minimax(newBoard, player) {
     let availableSpots = Board.emptySquares()
 
-    console.log(player)
-    if (checkWin(newBoard, player.symbol)) {
+    if (checkWin(newBoard, human.symbol)) {
       return {score: -10}
     } else if (checkWin(newBoard, computer.symbol)) {
-      return {score: 20}
+      return {score: 10}
     } else if (availableSpots.length === 0) {
       return {score: 0}
     }
@@ -132,7 +130,7 @@ const Game = (function() {
       newBoard[availableSpots[i]] = player
       
       if (player == computer.symbol) {
-        let result = minimax(newBoard, player.symbol)
+        let result = minimax(newBoard, human.symbol)
         move.score = result.score
       } else {
         let result = minimax(newBoard, computer.symbol)
@@ -143,6 +141,7 @@ const Game = (function() {
     
       moves.push(move)
     }
+
     let bestMove
     if (player === computer.symbol) {
       let bestScore = -10000
@@ -152,6 +151,14 @@ const Game = (function() {
           bestMove = i
         }
       } 
+    } else {
+      let bestScore = 10000
+      for (let i = 0; i < moves.length; i++) {
+        if (moves[i].score < bestScore) {
+          bestScore = moves[i].score
+          bestMove = i
+        }
+      }
     }
 
     return moves[bestMove]
