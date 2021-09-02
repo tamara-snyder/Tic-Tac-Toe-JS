@@ -1,24 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+
 body {
   box-sizing: border-box;
+  background-color: #fff8f0;
+  font-family: 'Architects Daughter', cursive;
+}
+
+h1 {
+  font-size: 4em;
+  text-align: center;
+}
+
+.table-container {
+  margin: auto;
+  position: relative;
+  padding: 20px;
+  background-color: #9dd9d2;
+  border-radius: 20px;
+  height: 70vh;
+  width: 70vh;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 td {
-  border: 2px solid #333;
-  height: 100px;
-  width: 100px;
+  border: 3px solid #333;
+  height: 20vh;
+  width: 20vh;
   text-align: center;
   vertical-align: middle;
-  font-family: "Comic Sans MS", cursive, sans-serif;
   font-size: 70px;
   cursor: pointer;
 }
 
 table {
   border-collapse: collapse;
-  position: absolute;
-  left: 50%;
-  margin-left: -157px;
-  top: 50px;
+  position: relative;
+  margin: auto;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 table tr:first-child td {
@@ -37,18 +57,93 @@ table tr td:last-child {
   border-right: 0;
 }
 
+.cell:hover {
+  background-color: #85d4cb;
+}
+
 .endgame {
   display: none;
-  width: 200px;
-  top: 120px;
-  background-color: rgba(205, 133, 63, 0.8);
-  position: absolute;
+  width: 250px;
   left: 50%;
-  margin-left: -100px;
+  background-color: rgba(70, 50, 130, 0.8);
+  position: absolute;
+  top: 50%;
+  margin-left: -125px;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
   padding-top: 50px;
   padding-bottom: 50px;
   text-align: center;
   border-radius: 5px;
   color: white;
   font-size: 2em;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+  position: relative;
+  margin-top: 20px;
+  width: 80%;
+  height: 50px;
+  /* background-color: #F3D068; */
+  background-color: rgb(206, 192, 245);
+  color: black;
+  font-size: 28px;
+  border-radius: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+button:hover {
+  background-color:rgb(194, 176, 241);
+  transition: 0.3s;
+}
+
+@media only screen and (min-device-width: 540px) {
+  .table-container {
+    width: 60vh;
+    height: 60vh;
+  }
+}
+
+@media only screen and (max-device-width: 480px) {
+	html {
+    height: 100%;
+  }
+
+  h1 {
+    font-size: 2.5em;
+  }
+
+  td {
+    width: 13vh;
+    height: 13vh;
+    font-size: 52px;
+  }
+
+  .table-container {
+    width: 40vh;
+    height: 40vh;
+  }
+
+  .endgame {
+    top: 40vh;
+  }
+}
+@media only screen and (max-device-width: 300px) {
+  td {
+    width: 10vh;
+    height: 10vh;
+    font-size: 34px;
+  }
+
+  .table-container {
+    width: 32vh;
+    height: 32vh;
+  }
+
+  .endgame {
+    top: 35vh;
+  }
 }

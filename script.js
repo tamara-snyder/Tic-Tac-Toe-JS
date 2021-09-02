@@ -72,10 +72,10 @@ const Game = (function() {
   function checkTie() {
     if (Board.emptySquares().length == 0) {
       for (let i = 0; i < Board.cells.length; i++) {
-        Board.cells[i].style.backgroundColor = 'green'
+        Board.cells[i].style.backgroundColor = '#f6da8d'
         Board.cells[i].removeEventListener('click', Board.turnClick, false)
       }
-      declareWinner('Tie Game!')
+      declareWinner('Tie game!')
       return true
     }
     return false
@@ -97,14 +97,14 @@ const Game = (function() {
 
   function gameOver(gameWon) {
     for (let index of winningCombos[gameWon.index]) {
-      document.getElementById(index).style.backgroundColor = gameWon.player == human.symbol ? "blue" : "red"
+      document.getElementById(index).style.backgroundColor = gameWon.player == human.symbol ? "#2274a5" : "#d8979c"
     }
 
     for (let i = 0; i < Board.cells.length; i++) {
       Board.cells[i].removeEventListener('click', Board.turnClick, false)
     }
 
-    declareWinner(gameWon.player == human.symbol ? 'You win' : 'You lose.')
+    declareWinner(gameWon.player == human.symbol ? 'You win!' : 'You lose :(')
   }
 
   function declareWinner(who) {
